@@ -9,6 +9,52 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
   
+  // Categories
+  app.get(api.categories.list.path, async (req, res) => {
+    const categories = await storage.getCategories();
+    res.json(categories);
+  });
+
+  app.post(api.categories.create.path, async (req, res) => {
+    try {
+      const input = api.categories.create.input.parse(req.body);
+      const category = await storage.createCategory(input);
+      res.status(201).json(category);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          message: err.errors[0].message,
+          field: err.errors[0].path.join('.'),
+        });
+      }
+      throw err;
+    }
+  });
+
+  app.put(api.categories.update.path, async (req, res) => {
+    try {
+      const id = Number(req.params.id);
+      const input = api.categories.update.input.parse(req.body);
+      const category = await storage.updateCategory(id, input);
+      if (!category) return res.status(404).json({ message: "Category not found" });
+      res.json(category);
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        return res.status(400).json({
+          message: err.errors[0].message,
+          field: err.errors[0].path.join('.'),
+        });
+      }
+      throw err;
+    }
+  });
+
+  app.delete(api.categories.delete.path, async (req, res) => {
+    const id = Number(req.params.id);
+    await storage.deleteCategory(id);
+    res.status(204).send();
+  });
+
   // Families
   app.get(api.families.list.path, async (req, res) => {
     const families = await storage.getFamilies();

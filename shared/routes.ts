@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { insertFamilySchema, insertSnackSchema, insertSelectionSchema, families, snacks, selections } from "./schema";
+import { insertCategorySchema, insertFamilySchema, insertSnackSchema, insertSelectionSchema, families, snacks, selections, categories } from "./schema";
 
 export const errorSchemas = {
   validation: z.object({
@@ -15,6 +15,42 @@ export const errorSchemas = {
 };
 
 export const api = {
+  categories: {
+    list: {
+      method: "GET" as const,
+      path: "/api/categories" as const,
+      responses: {
+        200: z.array(z.custom<typeof categories.$inferSelect>()),
+      },
+    },
+    create: {
+      method: "POST" as const,
+      path: "/api/categories" as const,
+      input: insertCategorySchema,
+      responses: {
+        201: z.custom<typeof categories.$inferSelect>(),
+        400: errorSchemas.validation,
+      },
+    },
+    update: {
+      method: "PUT" as const,
+      path: "/api/categories/:id" as const,
+      input: insertCategorySchema,
+      responses: {
+        200: z.custom<typeof categories.$inferSelect>(),
+        400: errorSchemas.validation,
+        404: errorSchemas.notFound,
+      },
+    },
+    delete: {
+      method: "DELETE" as const,
+      path: "/api/categories/:id" as const,
+      responses: {
+        204: z.void(),
+        404: errorSchemas.notFound,
+      },
+    },
+  },
   families: {
     list: {
       method: "GET" as const,
@@ -46,7 +82,7 @@ export const api = {
       method: "GET" as const,
       path: "/api/snacks" as const,
       responses: {
-        200: z.array(z.custom<typeof snacks.$inferSelect>()),
+        200: z.array(z.custom<typeof snacks.$inferSelect & { category: typeof categories.$inferSelect | null }>()),
       },
     },
     create: {
