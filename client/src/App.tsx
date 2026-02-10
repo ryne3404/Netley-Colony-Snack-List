@@ -9,6 +9,7 @@ import NotFound from "@/pages/not-found";
 
 // Page Imports
 import ManageSnacks from "@/pages/ManageSnacks";
+import ManageCategories from "@/pages/ManageCategories";
 import FamilyDetail from "@/pages/FamilyDetail";
 import MasterList from "@/pages/MasterList";
 
@@ -32,6 +33,7 @@ function Router() {
         
         {/* Admin Routes */}
         <Route path="/admin/snacks" component={ManageSnacks} />
+        <Route path="/admin/categories" component={ManageCategories} />
         <Route path="/admin/master-list" component={MasterList} />
         
         {/* Helper route to trigger create dialog */}

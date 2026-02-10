@@ -5,7 +5,8 @@ import {
   ShoppingBasket, 
   Users, 
   PlusCircle, 
-  Settings 
+  Settings,
+  Tags
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -47,6 +48,12 @@ export function Sidebar() {
           icon={LayoutDashboard} 
           label="Manage Snacks" 
           active={location === "/admin/snacks"} 
+        />
+        <NavItem 
+          href="/admin/categories" 
+          icon={Tags} 
+          label="Manage Categories" 
+          active={location === "/admin/categories"} 
         />
       </div>
 
