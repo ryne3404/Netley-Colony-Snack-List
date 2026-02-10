@@ -106,7 +106,7 @@ export default function FamilyDetail() {
               <div className="flex justify-between items-end mb-4">
                 <div>
                   <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Points Used</p>
-                  <p className={`text-3xl font-bold font-display ${isOverLimit ? 'text-destructive' : 'text-primary'}`}>
+                  <p className="text-3xl font-bold font-display text-[#820909]">
                     {totalPointsUsed} <span className="text-lg text-muted-foreground font-normal">/ {family.pointsAllowed}</span>
                   </p>
                 </div>
