@@ -24,7 +24,7 @@ export function Sidebar() {
   return (
     <div className="w-64 h-screen bg-muted/30 border-r border-border flex flex-col fixed left-0 top-0 overflow-y-auto">
       <div className="p-6">
-        <h1 className="text-2xl font-display bg-gradient-to-r from-primary to-accent bg-clip-text font-normal text-[#820909]">Netley Colony Snacks
+        <h1 className="text-2xl font-display bg-gradient-to-r from-primary to-accent bg-clip-text font-normal text-[#37d633]">Netley Colony Snacks
 </h1>
         <p className="text-xs text-muted-foreground mt-1 font-medium">Family Ordering System</p>
       </div>
