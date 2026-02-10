@@ -15,12 +15,7 @@ export function Sidebar() {
   const { data: families } = useFamilies();
 
   const NavItem = ({ href, icon: Icon, label, active }: { href: string; icon: any; label: string; active?: boolean }) => (
-    <Link href={href} className={cn(
-      "flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group",
-      active 
-        ? "bg-primary text-white shadow-lg shadow-primary/25 font-medium" 
-        : "text-muted-foreground hover:bg-white hover:text-foreground hover:shadow-sm"
-    )}>
+    <Link href={href} className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group text-white shadow-lg shadow-primary/25 font-medium bg-[#820909]">
       <Icon className={cn("w-5 h-5", active ? "text-white" : "text-muted-foreground group-hover:text-primary")} />
       <span>{label}</span>
     </Link>
