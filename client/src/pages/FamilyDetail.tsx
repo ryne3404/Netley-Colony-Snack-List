@@ -96,7 +96,7 @@ export default function FamilyDetail() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-2">
               <h1 className="text-4xl font-display font-bold text-foreground flex items-center gap-3">
-                <span className="bg-primary/10 px-3 py-1 rounded-lg text-3xl text-[#820909]">{family.name}</span>
+                <span className="px-3 py-1 rounded-lg text-3xl text-[#820909] bg-[#ffffff1a]">{family.name}</span>
                 <span>Selection List</span>
               </h1>
               <p className="text-muted-foreground text-lg">Select your snacks below. Points are calculated automatically.</p>
