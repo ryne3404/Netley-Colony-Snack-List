@@ -47,7 +47,7 @@ export default function MasterList() {
             </Card>
             <Card className="bg-white border-none shadow-sm">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="p-3 bg-purple-100 text-purple-600 rounded-full">
+                <div className="p-3 rounded-full text-[#37d633] bg-[#ffffff]">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
                 <div>
