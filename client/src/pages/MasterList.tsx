@@ -36,7 +36,7 @@ export default function MasterList() {
           <div className="grid grid-cols-2 gap-4 print:hidden">
             <Card className="bg-white border-none shadow-sm">
               <CardContent className="p-6 flex items-center gap-4">
-                <div className="p-3 bg-blue-100 text-blue-600 rounded-full">
+                <div className="p-3 rounded-full text-[#37d633] bg-[#ffffff]">
                   <ShoppingBag className="w-6 h-6" />
                 </div>
                 <div>
