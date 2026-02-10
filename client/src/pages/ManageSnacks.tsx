@@ -101,7 +101,7 @@ export default function ManageSnacks() {
                         <TableCell className="font-medium text-foreground">{snack.name}</TableCell>
                         <TableCell className="text-muted-foreground">{snack.store || "-"}</TableCell>
                         <TableCell>
-                          <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                          <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium text-[#820909] bg-[#fcfcfc1a]">
                             {snack.points} pts
                           </span>
                         </TableCell>
