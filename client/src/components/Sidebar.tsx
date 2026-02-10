@@ -29,12 +29,10 @@ export function Sidebar() {
   return (
     <div className="w-64 h-screen bg-muted/30 border-r border-border flex flex-col fixed left-0 top-0 overflow-y-auto">
       <div className="p-6">
-        <h1 className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-          SnackList
-        </h1>
+        <h1 className="text-2xl font-display bg-gradient-to-r from-primary to-accent bg-clip-text font-normal text-[#820909]">Netley Colony Snacks
+</h1>
         <p className="text-xs text-muted-foreground mt-1 font-medium">Family Ordering System</p>
       </div>
-
       <div className="px-3 space-y-1">
         <p className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 mt-2">Admin</p>
         <NavItem 
@@ -56,7 +54,6 @@ export function Sidebar() {
           active={location === "/admin/categories"} 
         />
       </div>
-
       <div className="px-3 mt-8 space-y-1 flex-1">
         <div className="flex items-center justify-between px-3 mb-2">
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Families</p>
@@ -81,7 +78,6 @@ export function Sidebar() {
           </div>
         )}
       </div>
-
       <div className="p-4 mt-auto border-t border-border">
         <div className="flex items-center gap-3 px-3 py-2 text-sm text-muted-foreground">
           <Settings className="w-4 h-4" />
