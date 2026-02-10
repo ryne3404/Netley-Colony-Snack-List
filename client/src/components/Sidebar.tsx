@@ -17,7 +17,7 @@ export function Sidebar() {
   const NavItem = ({ href, icon: Icon, label, active }: { href: string; icon: any; label: string; active?: boolean }) => (
     <Link href={href} className="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group shadow-lg shadow-primary/25 font-medium text-[#ffffff] bg-[#ffffff]">
       <Icon className={cn("w-5 h-5", active ? "text-white" : "text-muted-foreground group-hover:text-primary")} />
-      <span>{label}</span>
+      <span className="text-[#820909]">{label}</span>
     </Link>
   );
 
