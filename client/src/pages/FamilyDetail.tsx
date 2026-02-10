@@ -10,6 +10,8 @@ import { Progress } from "@/components/ui/progress";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useCategories } from "@/hooks/use-categories";
 import { Loader2, AlertCircle, ShoppingCart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useMemo } from "react";
 
 export default function FamilyDetail() {
   const params = useParams();
