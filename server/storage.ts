@@ -16,8 +16,9 @@ export interface IStorage {
   deleteCategory(id: number): Promise<void>;
 
   // Families
-  getFamilies(): Promise<FamilyWithTotal[]>;
+  getFamilies(): Promise<(Family & { totalPointsUsed: number })[]>;
   getFamily(id: number): Promise<Family | undefined>;
+  getFamilyByName(name: string): Promise<Family | undefined>;
   createFamily(family: InsertFamily): Promise<Family>;
   
   // Snacks
@@ -64,7 +65,7 @@ export class DatabaseStorage implements IStorage {
     await db.delete(categories).where(eq(categories.id, id));
   }
 
-  async getFamilies(): Promise<FamilyWithTotal[]> {
+  async getFamilies(): Promise<(Family & { totalPointsUsed: number })[]> {
     const rows = await db.execute(sql`
       SELECT f.*, COALESCE(SUM(sel.quantity * s.points), 0)::int as total_points_used
       FROM families f
@@ -78,8 +79,15 @@ export class DatabaseStorage implements IStorage {
       id: row.id as number,
       name: row.name as string,
       pointsAllowed: row.points_allowed as number,
+      accessCode: row.access_code as string,
+      role: row.role as string,
       totalPointsUsed: row.total_points_used as number
     }));
+  }
+
+  async getFamilyByName(name: string): Promise<Family | undefined> {
+    const [family] = await db.select().from(families).where(eq(families.name, name));
+    return family;
   }
 
   async getFamily(id: number): Promise<Family | undefined> {

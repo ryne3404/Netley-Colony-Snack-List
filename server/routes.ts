@@ -9,6 +9,16 @@ export async function registerRoutes(
   app: Express
 ): Promise<Server> {
   
+  // Auth
+  app.post("/api/login", async (req, res) => {
+    const { name, accessCode } = req.body;
+    const family = await storage.getFamilyByName(name);
+    if (!family || family.accessCode !== accessCode) {
+      return res.status(401).json({ message: "Invalid acronym or code" });
+    }
+    res.json(family);
+  });
+
   // Categories
   app.get(api.categories.list.path, async (req, res) => {
     const categories = await storage.getCategories();
