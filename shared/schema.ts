@@ -3,17 +3,19 @@ import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { relations } from "drizzle-orm";
 
-// Categories table
-export const categories = pgTable("categories", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull().unique(),
-});
-
 // Families table (e.g., AEH, ASH, etc.)
 export const families = pgTable("families", {
   id: serial("id").primaryKey(),
   name: text("name").notNull().unique(), // The acronym
   pointsAllowed: integer("points_allowed").notNull().default(0),
+  accessCode: text("access_code").notNull().default("1234"), // Code for login
+  role: text("role").notNull().default("user"), // 'admin' or 'user'
+});
+
+// Categories table
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
 });
 
 // Snacks table
