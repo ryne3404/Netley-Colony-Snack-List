@@ -12,29 +12,46 @@ import ManageSnacks from "@/pages/ManageSnacks";
 import ManageCategories from "@/pages/ManageCategories";
 import FamilyDetail from "@/pages/FamilyDetail";
 import MasterList from "@/pages/MasterList";
+import LoginPage from "@/pages/LoginPage";
 
 function Router() {
   const [createFamilyOpen, setCreateFamilyOpen] = useState(false);
 
+  // Simple auth check
+  const userStr = localStorage.getItem("user");
+  const user = userStr ? JSON.parse(userStr) : null;
+
+  if (!user) {
+    return (
+      <Switch>
+        <Route path="/login" component={LoginPage} />
+        <Route component={() => <Redirect to="/login" />} />
+      </Switch>
+    );
+  }
+
   // Helper component to handle the dialog state via URL
   const CreateFamilyRoute = () => {
     setCreateFamilyOpen(true);
-    // Render nothing here, the dialog is global or handled below
-    // But actually, we want to redirect back to master list if they cancel
-    // This is a bit tricky with wouter without a layout component, 
-    // so let's just handle it via the state passed to the dialog
     return <Redirect to="/admin/master-list" />;
   };
 
   return (
     <>
       <Switch>
-        <Route path="/" component={() => <Redirect to="/admin/master-list" />} />
+        <Route path="/login" component={() => <Redirect to={user.role === 'admin' ? "/admin/master-list" : `/family/${user.id}`} />} />
+        <Route path="/" component={() => <Redirect to={user.role === 'admin' ? "/admin/master-list" : `/family/${user.id}`} />} />
         
         {/* Admin Routes */}
-        <Route path="/admin/snacks" component={ManageSnacks} />
-        <Route path="/admin/categories" component={ManageCategories} />
-        <Route path="/admin/master-list" component={MasterList} />
+        <Route path="/admin/snacks">
+          {user.role === 'admin' ? <ManageSnacks /> : <Redirect to={`/family/${user.id}`} />}
+        </Route>
+        <Route path="/admin/categories">
+          {user.role === 'admin' ? <ManageCategories /> : <Redirect to={`/family/${user.id}`} />}
+        </Route>
+        <Route path="/admin/master-list">
+          {user.role === 'admin' ? <MasterList /> : <Redirect to={`/family/${user.id}`} />}
+        </Route>
         
         {/* Helper route to trigger create dialog */}
         <Route path="/admin/families/new" component={CreateFamilyRoute} />

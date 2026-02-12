@@ -210,6 +210,14 @@ export class DatabaseStorage implements IStorage {
 
     const existingFamilies = await this.getFamilies();
     if (existingFamilies.length === 0) {
+      // Create Admin account
+      await this.createFamily({ 
+        name: "Admin", 
+        pointsAllowed: 0, 
+        accessCode: "password123", 
+        role: "admin" 
+      });
+
       for (const name of familyNames) {
         await this.createFamily({ name, pointsAllowed: 800 });
       }
